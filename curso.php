@@ -18,70 +18,121 @@ $curso = json_decode(Requesicao::curlGet('curso/'.$_GET['id']))->curso;
 	<body class="bg-secondary text-light">
 		<?php Navbar::renderizar(2); ?>
 		<ol class="breadcrumb" style="border-radius: 0; border: 2px solid #e9ecef; margin: 0 auto;">
-				<li class="breadcrumb-item"><a href="cursos.php">Cursos</a></li>
-				<li class="breadcrumb-item active" aria-current="page"><?php echo $curso->nome; ?></li>
-			</ol>
+			<li class="breadcrumb-item"><a href="cursos.php">Cursos</a></li>
+			<li class="breadcrumb-item active" aria-current="page"><?php echo $curso->nome; ?></li>
+		</ol>
 
-			<div class="container" style="padding-top: 5px;">
-				<div class="row">
-					<div class="col-sm-9 titleCurso" style="padding-top: 25px;">
+		<div class="container bg-light text-dark">
+			<div class="row">
+				<div class="col-sm-9">
+					<div>
 						<h1><?php echo $curso->nome; ?></h1>
 
 						<h4>Descrição:</h4>
-						<span><?php echo $curso->descricao; ?></span>
+						<p><?php echo $curso->descricao; ?></p>
 
-						<h4>O que você vai aprender:</h4>
-						<ul>
-							<li>Pellentesque consequat nisi sit amet sem finibus malesuada.</li>
-							<li>Phasellus quis nisi et purus varius placerat.</li>
-							<li>Etiam porta erat sit amet dui pulvinar, non tempor nunc lacinia.</li>
-							<li>Ut fringilla tellus a dictum malesuada</li>
-						</ul>
-					<?php if(!is_null($curso->criador->biografia)){ /* Caso o professor tiver uma descricao, esta sera imprimida */ ?>
-						<h4>Sobre o professor:</h4>
-						<span><?php echo $curso->criador->biografia; ?></span>
-					<?php } ?>
+						<h4>Sobre</h4>
+						<p><?php echo $curso->descricao; ?></p>
 					</div>
-					<div class="col-sm-3" style="background: #0f6f6e; color: white; padding-top: 25px;">
-						<h5>Oferecido por: <?php echo $curso->criador->nome;?></h5>
-						<img src="/src/img/perfil.png" class="rounded-circle" style="width: 50%;">
-						<br>
-						<h6><?php echo $curso->horas; ?> Horas</h6>
-						<button type="button" class="btn btn-success"><i class="fas fa-coins"></i> Comprar</button>
-					</div>
-				</div>
-			</div>
-			<div class="container" style="padding-top: 5px;">
-				<div class="row">
-					<div class="col-sm-12 accordCurso">
-						<h4 class="text-white" style="padding-left: 50px; padding-top: 10px;">Conteudo do curso:</h4>
-						<div class="accordion" id="accordionExample">
+					<div>
+						<h4>Modulos:</h4>
+						<div id="accordion">
+							<?php
+							$i = 1;
+							foreach ($curso->modulos as $chave => $modulo) {
+							
+							?>
 							<div class="card">
 								<div class="card-header" id="heading<?php echo convertNumberToWord($i); ?>">
 									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="true" aria-controls="collapse">
+										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo convertNumberToWord($i); ?>" aria-expanded="true" aria-controls="collapse<?php echo convertNumberToWord($i); ?>">
+										<?php echo $modulo->nome; ?>
 										</button>
 									</h2>
 								</div>
-								<div id="collapse" class="collapse" aria-labelledby="heading" data-parent="#accordionExample">
+								<div id="collapse<?php echo convertNumberToWord($i); ?>" class="collapse" aria-labelledby="heading<?php echo convertNumberToWord($i); ?>" data-parent="#accordion">
 									<div class="card-body">
 										<ul style="padding-left: 10px;">
+											<?php
+											foreach($modulo->licoes as $chave => $licao){
+												echo "<li>$licao->nome</li>";
+											}
+											?>
 										</ul>
 									</div>
 								</div>
 							</div>
+							<?php
+							$i++;
+							}
+							?>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3 bg-primary text-light pt-2 pb-2">
+					<div>
+						<div>
+							<img src="/src/img/perfil.png" class="rounded-circle m-auto d-block" style="width: 50%;">
+							<h5 class="text-center"><?php echo $curso->criador->nome;?></h5>
+							<div class="dropdown-divider"></div>
+							<?php 
+							if(!is_null($curso->criador->biografia)){
+							?>
+								<p class="text-justify"><?php echo $curso->criador->biografia; ?></p>
+							<?php 
+							}
+							?>
+						</div>
+						<div class="text-center">
+							<div class="dropdown-divider"></div>
+							<h5>Informações adicionais</h5>
+							<h6>
+								<?php 
+								$totalHoras = $curso->horas;
+								if($totalHoras == 0)
+									echo 'Nenhuma hora';
+								else if($totalHoras == 1)
+									echo $totalHoras . ' hora';
+								else
+									echo $totalHoras . ' horas';
+								?>
+							</h6>
+							<h6>
+								<?php
+								$totalModulos = count($curso->modulos);
+								if($totalModulos == 0)
+									echo 'Nenhum modulo';
+								else if($totalModulos == 1)
+									echo $totalModulos . ' modulo';
+								else
+									echo $totalModulos . ' modulos';
+								?>
+							</h6>
+							<div class="dropdown-divider"></div>
+							<h5 class="ml-auto mr-auto mb-2" style="overflow: hidden;">
+								<?php 
+									if($curso->preco == null || $curso->preco <= 0){
+										echo 'Livre';
+									}else{
+								?>
+										<div class="text-right float-left" style="font-size: 9px; width: 50%;">
+											<span class="font-weight-normal d-block">TOTAL DE</span>
+											<span class="font-weight-normal d-block">R$</span>
+										</div>	
+								<?php
+										echo '<div class="text-left float-left" style="font-size: 24px; line-height: 20px; width: 50%;">';
+										printf("%0.2f", $curso->preco);
+										echo '</div>';
+									}
+								?>
+										
+							</h5>
+							<button type="button" class="btn btn-success btn-block"><i class="fas fa-coins"></i> Comprar</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="container">
-				<div class="row border border-dark ">
-					<div class="col-sm-12 cont-curso">
-						<div class="container">
-						</div>
-					</div>
-				</div>
-			</div>
+		</div>
 
 		<?php include "src/include/footer.php"; ?>
 
