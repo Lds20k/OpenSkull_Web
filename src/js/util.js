@@ -3,6 +3,7 @@ function logar(jwt){
 	http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             try{
+                document.getElementById('formLogin').submit();
                 location.reload();
             }catch(exceptions){
                 console.log("Impossivel fazer login: " + exceptions);
@@ -12,6 +13,22 @@ function logar(jwt){
 	http.open("POST", "http://www.openskull.com/php/logar.php", true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     http.send('jwt='+jwt);
+}
+
+function deslogar(){
+	var http = new XMLHttpRequest();
+	http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            try{
+                location.reload();
+            }catch(exceptions){
+                console.log("Impossivel fazer logout: " + exceptions);
+            }
+        }
+      };
+	http.open("GET", "http://www.openskull.com/php/logout.php", true);
+    http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    http.send();
 }
 
 function requisitarRestApi(api, parametros, metodo, funcao){

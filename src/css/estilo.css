@@ -49,6 +49,12 @@ html{
   -ms-transform: translate(-50%,-50%);
 }
 
+#spinnerLogout{
+  position: absolute;
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
+}
+
 /*Bootstrap override*/
 .bg-dark {
   background-color:#151515 !important

@@ -4,6 +4,7 @@ abstract class Navbar{
 
     private static function menu(){
         ?>
+        <script type="text/javascript" src="/src/js/app.js"></script>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
             <a class="navbar-brand" href="#">
                 <img src="/src/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -20,7 +21,6 @@ abstract class Navbar{
                 <?php
                 if( !isset($_SESSION['jwt']) ){
                 ?>
-                <script type="text/javascript" src="/src/js/app.js"></script>
                 <button class="btn btn-light" onclick="on();"><i class="fas fa-user"></i> Entrar</button>
                 <div id="overlay">
                     <div id="fundo" onclick="off(this)"></div>
@@ -45,17 +45,21 @@ abstract class Navbar{
                 </div>
                 <?php 
                 } else { 
-                ?>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ?> 
+                    <div class="btn-group dropleft">
+                        <button type="button" id="btnUsuario" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?php echo $_SESSION['nome']; ?>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="perfil.php">Perfil</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Sair</a>
+                            <a class="dropdown-item" href="#" onclick="logout();">Sair</a>
+                        </div>
+                    </div>
+                    <div id="overlay">
+                        <div id="fundo"></div>
+                        <div class="spinner-border text-light" id="spinnerLogout" role="status">
+                            <span class="sr-only">Carregando...</span>
                         </div>
                     </div>
                 <?php 

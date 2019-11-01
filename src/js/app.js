@@ -39,3 +39,8 @@ function login() {
 		});
 	}
 }
+function logout(){
+	document.getElementById("overlay").style.display = "block";
+	document.getElementsByTagName("HTML")[0].style.overflowY = "hidden";
+	deslogar();
+}

@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once('src/include/navbar/navbar.php');
 require_once('php/util.php');
-session_start();
 $curso = json_decode(Requesicao::curlGet('curso/'.$_GET['id']))->curso;
 ?>
 <!DOCTYPE html>
