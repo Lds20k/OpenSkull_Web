@@ -10,9 +10,9 @@ $curso = json_decode(Requesicao::curlGet('curso/'.$_GET['id']))->curso;
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link href="/src/fontawesome/css/all.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="/src/css/estilo.css">
-		<script type="text/javascript" src="/src/js/util.js"></script>
+		<link href="src/fontawesome/css/all.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="src/css/estilo.css">
+		<script type="text/javascript" src="src/js/util.js"></script>
 		<title>OpenSkull - <?php echo $curso->nome; ?></title>
 	</head>
 	<body class="bg-secondary text-light">
@@ -127,10 +127,32 @@ $curso = json_decode(Requesicao::curlGet('curso/'.$_GET['id']))->curso;
 								?>
 										
 							</h5>
-							<button type="button" class="btn btn-success btn-block"><i class="fas fa-coins"></i> Comprar</button>
+							<button type="button" class="btn btn-success btn-block" onclick="comprar()"><i class="fas fa-coins"></i> Comprar</button>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<div id="overlayComprar">
+			<div id="fundo" onclick="comprarOff()"></div>
+			<div id="formulario" class="shadow">
+				<form id="formLogin" class="card text-dark">
+					<div class="card-body">
+						<h5 class="card-title">Iniciar Sessão</h5>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email</label>
+							<input type="email" class="form-control" id="txtLoginEmail" aria-describedby="emailHelp" placeholder="Email">
+							<small id="emailHelp" class="form-text text-muted">Você nunca deve compartilhar seu email</small>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Senha</label>
+							<input type="password" class="form-control" id="pssLoginSenha" placeholder="Senha">
+						</div>
+						<div class="form-group" id="loginErro"></div>
+						<button onclick="login();" class="btn btn-dark" type="button">Entrar</button>
+					</div>
+				</form>
 			</div>
 		</div>
 

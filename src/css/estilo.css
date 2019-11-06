@@ -17,6 +17,7 @@ html{
   background-repeat: no-repeat;
 }
 /* Login overlaay */
+#overlayComprar,
 #overlay {
   position: fixed;
   display: none;

@@ -39,8 +39,19 @@ function login() {
 		});
 	}
 }
+
 function logout(){
 	document.getElementById("overlay").style.display = "block";
 	document.getElementsByTagName("HTML")[0].style.overflowY = "hidden";
 	deslogar();
+}
+
+function comprar(){
+	document.getElementById("overlayComprar").style.display = "block";
+	document.getElementsByTagName("HTML")[0].style.overflowY = "hidden";
+}
+
+function comprarOff(){
+	document.getElementById("overlayComprar").style.display = "none";
+	document.getElementsByTagName("HTML")[0].style.overflowY = "scroll";
 }

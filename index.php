@@ -10,9 +10,9 @@ $cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link href="/src/fontawesome/css/all.css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="/src/css/estilo.css">
-		<script type="text/javascript" src="/src/js/util.js"></script>
+		<link href="src/fontawesome/css/all.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="src/css/estilo.css">
+		<script type="text/javascript" src="src/js/util.js"></script>
 		<title>OpenSkull - Welcome!</title>
 	</head>
 	<body class="bg-secondary text-light">
@@ -26,7 +26,7 @@ $cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
 					for($i = 0; $i < 4; $i++) {
 				?>
 				<div class="card">
-					<img src="/src/img/conteudonaoencontra255-98.png" class="card-img-top" alt="...">
+					<img src="src/img/conteudonaoencontra255-98.png" class="card-img-top" alt="...">
 					<div class="card-body">
 						<h5 class="card-title"><?php echo $cursos[$i]->nome;?></h5>
 						<p class="card-text text-justify"><?php echo $cursos[$i]->descricao;?></p>

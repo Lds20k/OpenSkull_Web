@@ -4,10 +4,10 @@ abstract class Navbar{
 
     private static function menu(){
         ?>
-        <script type="text/javascript" src="/src/js/app.js"></script>
+        <script type="text/javascript" src="src/js/app.js"></script>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
             <a class="navbar-brand" href="#">
-                <img src="/src/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                <img src="src/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 OpenSkull
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@ abstract class Navbar{
                 ?> 
                     <div class="btn-group dropleft">
                         <button type="button" id="btnUsuario" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <?php echo $_SESSION['nome']; ?>
+                            <i class="fas fa-user"></i> <?php echo $_SESSION['nome']; ?>
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="perfil.php">Perfil</a>
@@ -87,7 +87,7 @@ abstract class Navbar{
                     <a class="dropdown-item" href="cursos.php">Todos</a>
                     <a class="dropdown-item" href="meuscursos.php">Meus</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="criarcurso.php">Criar</a>
+                    <a class="dropdown-item" href="download.php">Criar</a>
                 </div>
             </li>
         <?php
@@ -100,11 +100,6 @@ abstract class Navbar{
             </li>
         <?php
         }
-        ?>
-        <li class="nav-item <?php Navbar::atual(3, Navbar::$index);?>">
-            <a class="nav-link" href="#">Download</a>
-        </li>
-        <?php
     }
 
     private static function atual($numeroPagina, $index){

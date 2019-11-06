@@ -2,7 +2,10 @@
 require_once('src/include/navbar/navbar.php');
 require_once('php/util.php');
 session_start();
-$cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
+if(!isset($_SESSION['jwt'])){
+    header("Location: cursos.php");
+}
+$cursos = json_decode(Requesicao::curlGet('usuario/curso/'.$_SESSION['jwt']))->cursos;
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +24,7 @@ $cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
 			<div class="row">
 				<div class="col-sm-12 cont-curso">
 					<div class="container">
-						<h3 class="mt-4 mb-4"><i class="fas fa-pencil-alt"></i> Cursos</h3>
+						<h3 class="mt-4 mb-4"><i class="fas fa-pencil-alt"></i> Meus cursos</h3>
 					</div>
 				</div>
 			</div>
@@ -31,8 +34,8 @@ $cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
 				<?php
 				foreach ($cursos as $key => $curso) {
 				?>
-					<a href="curso.php?id=<?php echo $curso->id;?>" class="col-sm-6 mt-3 mb-3 text-dark text-decoration-none">
-						<div class="card shadow-lg" style="max-width: 540px;">
+					<a href="estudar.php?id=<?php echo $curso->id;?>" class="col-sm-6 mt-3 mb-3 text-dark text-decoration-none">
+						<div class="card shadow-lg <?php echo $curso->ativado ? 'border-success' : 'border-danger'; ?>" style="max-width: 540px; border: none; border-bottom: 15px solid;">
 							<div class="row no-gutters">
 								<div class="col-md-4">
 									<img src="src/img/conteudonaoencontra255-255.png" class="card-img" alt="...">
