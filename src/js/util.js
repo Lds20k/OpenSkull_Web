@@ -10,7 +10,7 @@ function logar(jwt){
             }
         }
       };
-	http.open("POST", "http://www.openskull.com/php/logar.php", true);
+	http.open("POST", "php/logar.php", true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     http.send('jwt='+jwt);
 }
@@ -26,13 +26,13 @@ function deslogar(){
             }
         }
       };
-	http.open("GET", "http://www.openskull.com/php/logout.php", true);
+	http.open("GET", "php/logout.php", true);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     http.send();
 }
 
 function requisitarRestApi(api, parametros, metodo, funcao){
-    let webService = "http://www.openskull.web_service.com";
+    let url = "http://localhost:8000";
     api = "/api/" + api;
 	var http = new XMLHttpRequest();
 	http.onreadystatechange = function() {
@@ -42,7 +42,7 @@ function requisitarRestApi(api, parametros, metodo, funcao){
                 funcao(resposta);
             }catch(exceptions){
                 console.log("Impossivel fazer a converção par json: " + exceptions);
-                console.log("Para: " + webService + api );
+                console.log("Para: " + url + api );
             }
         }
     };
@@ -52,7 +52,7 @@ function requisitarRestApi(api, parametros, metodo, funcao){
     }else{
         parametros = '';
     }
-	http.open(metodo, webService + api + parametros, true);
+	http.open(metodo, url + api + parametros, true);
     http.send();
 }
 

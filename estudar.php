@@ -2,7 +2,7 @@
 session_start();
 require_once('src/include/navbar/navbar.php');
 require_once('php/util.php');
-$curso = json_decode(Requesicao::curlGet('modulo/all/'.$_GET['id']))->modulos;
+$curso = json_decode(Requesicao::curlGet('curso/'.$_GET['id']))->curso;
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,9 +17,15 @@ $curso = json_decode(Requesicao::curlGet('modulo/all/'.$_GET['id']))->modulos;
 	</head>
 	<body class="bg-secondary text-light">
 		<?php Navbar::renderizar(2); ?>
-		<div class="container">
-
-        </div>
+		<div class="container-fluid bg-light text-dark">
+			<div class="row">
+				<div class="col-sm-12 cont-curso">
+					<div class="container">
+						<h3 class="mt-4 mb-4"><?php echo $curso->nome; ?></h3>
+					</div>
+				</div>
+			</div>
+		</div>
 		<?php include "src/include/footer.php"; ?>
 
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
