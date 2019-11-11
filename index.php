@@ -23,18 +23,18 @@ $cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
 			</h2>
 			<div class="card-deck text-dark">
 				<?php
-					for($i = 0; $i < 4; $i++) {
+				foreach ($cursos as $key => $curso) {
 				?>
-				<div class="card">
-					<img src="src/img/conteudonaoencontra255-98.png" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title"><?php echo $cursos[$i]->nome;?></h5>
-						<p class="card-text text-justify"><?php echo $cursos[$i]->descricao;?></p>
-						<a href="curso.php?id=<?php echo $cursos[$i]->id;?>" class="btn btn-dark">Dar uma olhada</a>
+					<div class="card">
+						<img src="<?php echo Requesicao::getUrl().'/midia/imagens/'.$curso->imagem;?>" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title"><?php echo $curso->nome;?></h5>
+							<p class="card-text text-justify"><?php echo $curso->descricao;?></p>
+							<a href="curso.php?id=<?php echo $curso->id;?>" class="btn btn-dark">Dar uma olhada</a>
+						</div>
 					</div>
-				</div>
 				<?php
-					}
+				}
 				?>
 			</div>
 		</div>

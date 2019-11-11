@@ -35,7 +35,7 @@ $cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
 						<div class="card shadow-lg" style="max-width: 540px;">
 							<div class="row no-gutters">
 								<div class="col-md-4">
-									<img src="src/img/conteudonaoencontra255-255.png" class="card-img" alt="...">
+									<img src="<?php echo Requesicao::getUrl().'/midia/imagens/'.$curso->imagem;?>" class="card-img" alt="...">
 								</div>
 								<div class="col-md-8">
 									<div class="card-body p-3" style="height: 100%;">

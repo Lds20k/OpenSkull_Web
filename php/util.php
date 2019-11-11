@@ -1,7 +1,11 @@
 <?php
 
 abstract class Requesicao{
-    private static $url = 'http://localhost:8000';
+    private static $url = 'http://www.openskull.web_service.com';
+
+    public static function getUrl(){
+        return Requesicao::$url;
+    }
     public static function curlPost($api, array $post = NULL, array $options = array())
     {
         $api = Requesicao::$url.'/api/'.$api;

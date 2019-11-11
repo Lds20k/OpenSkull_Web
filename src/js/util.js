@@ -32,7 +32,7 @@ function deslogar(){
 }
 
 function requisitarRestApi(api, parametros, metodo, funcao){
-    let url = "http://localhost:8000";
+    let url = "http://www.openskull.web_service.com";
     api = "/api/" + api;
 	var http = new XMLHttpRequest();
 	http.onreadystatechange = function() {

@@ -5,7 +5,7 @@ session_start();
 if(!isset($_SESSION['jwt'])){
     header("Location: cursos.php");
 }
-$cursos = json_decode(Requesicao::curlGet('usuario/curso/'.$_SESSION['jwt']))->cursos;
+$cursos = json_decode(Requesicao::curlGet('usuario/curso/'.$_SESSION['jwt']));
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,13 +32,17 @@ $cursos = json_decode(Requesicao::curlGet('usuario/curso/'.$_SESSION['jwt']))->c
 		<div class="container text-dark" id="cursosContainer" style="min-height: 600px;">
 			<div class="row mt-3 mb-3">
 				<?php
-				foreach ($cursos as $key => $curso) {
+				if(!isset($cursos))
+					echo '<div class="alert alert-warning" role="alert"><i class="fas fa-exclamation-triangle"></i> Você não possui nenhum curso!</div>';
+				else{
+					$cursos->cursos;
+					foreach ($cursos as $key => $curso) {
 				?>
 					<a href="estudar.php?id=<?php echo $curso->id;?>" class="col-sm-6 mt-3 mb-3 text-dark text-decoration-none">
 						<div class="card shadow-lg <?php echo $curso->ativado ? 'border-success' : 'border-danger'; ?>" style="max-width: 540px; border: none; border-bottom: 15px solid;">
 							<div class="row no-gutters">
 								<div class="col-md-4">
-									<img src="src/img/conteudonaoencontra255-255.png" class="card-img" alt="...">
+									<img src="<?php echo Requesicao::getUrl().'/midia/imagens/'.$curso->imagem;?>" class="card-img" alt="...">
 								</div>
 								<div class="col-md-8">
 									<div class="card-body p-3" style="height: 100%;">
@@ -54,6 +58,7 @@ $cursos = json_decode(Requesicao::curlGet('usuario/curso/'.$_SESSION['jwt']))->c
 						</div>
 					</a>
 				<?php
+					}
 				}
 				?>
 			</div>
