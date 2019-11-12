@@ -35,7 +35,7 @@ $cursos = json_decode(Requesicao::curlGet('usuario/curso/'.$_SESSION['jwt']));
 				if(!isset($cursos))
 					echo '<div class="alert alert-warning" role="alert"><i class="fas fa-exclamation-triangle"></i> Você não possui nenhum curso!</div>';
 				else{
-					$cursos->cursos;
+					$cursos = $cursos->cursos;
 					foreach ($cursos as $key => $curso) {
 				?>
 					<a href="estudar.php?id=<?php echo $curso->id;?>" class="col-sm-6 mt-3 mb-3 text-dark text-decoration-none">

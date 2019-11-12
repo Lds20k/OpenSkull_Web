@@ -46,9 +46,25 @@ function logout(){
 	deslogar();
 }
 
-function comprar(){
-	document.getElementById("overlayComprar").style.display = "block";
-	document.getElementsByTagName("HTML")[0].style.overflowY = "hidden";
+function comprar(jwtIn, cursoIdIn){
+	var enviar = {
+		jwt: jwtIn,
+		cursoId: cursoIdIn
+	};
+	console.log(enviar);
+
+	requisitarRestApi("usuario/curso/adicionar", enviar, "POST", function(resposta){
+		if(resposta){
+			console.log(resposta);
+			document.getElementById("overlayComprar").style.display = "block";
+			document.getElementsByTagName("HTML")[0].style.overflowY = "hidden";
+			if(resposta.status){
+				document.getElementById("compraRetorno").innerHTML = "Compra efetuada com sucesso!";
+			}else{
+				document.getElementById("compraRetorno").innerHTML = "Erro ao fazer compra!";
+			}
+		}
+	});
 }
 
 function comprarOff(){

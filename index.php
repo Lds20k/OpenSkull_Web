@@ -2,7 +2,7 @@
 require_once('src/include/navbar/navbar.php');
 require_once('php/util.php');
 session_start();
-$cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
+$cursos = json_decode(Requesicao::curlGet('curso'));
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,22 +21,30 @@ $cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
 			<h2>
 				<strong>NOVOS CURSOS</strong>
 			</h2>
+			<?php
+			if(!is_null($cursos) and count($cursos->cursos) > 3){
+				$cursos = $cursos->cursos;
+				$ultimaPosicao = count($cursos)-1;
+			?>
 			<div class="card-deck text-dark">
 				<?php
-				foreach ($cursos as $key => $curso) {
+				for($i = $ultimaPosicao; $i > ($ultimaPosicao - 4); $i--) {
 				?>
 					<div class="card">
-						<img src="<?php echo Requesicao::getUrl().'/midia/imagens/'.$curso->imagem;?>" class="card-img-top" alt="...">
+						<img src="<?php echo Requesicao::getUrl().'/midia/imagens/'.$cursos[$i]->imagem;?>" class="card-img-top" alt="...">
 						<div class="card-body">
-							<h5 class="card-title"><?php echo $curso->nome;?></h5>
-							<p class="card-text text-justify"><?php echo $curso->descricao;?></p>
-							<a href="curso.php?id=<?php echo $curso->id;?>" class="btn btn-dark">Dar uma olhada</a>
+							<h5 class="card-title"><?php echo $cursos[$i]->nome;?></h5>
+							<p class="card-text text-justify"><?php echo $cursos[$i]->descricao;?></p>
+							<a href="curso.php?id=<?php echo $cursos[$i]->id;?>" class="btn btn-dark">Dar uma olhada</a>
 						</div>
 					</div>
 				<?php
 				}
 				?>
 			</div>
+			<?php
+			}
+			?>
 		</div>
 
 		<div class="texto bg-dark">
