@@ -34,7 +34,7 @@ $cursos = json_decode(Requesicao::curlGet('curso'));
 						<img src="<?php echo Requesicao::getUrl().'/midia/imagens/'.$cursos[$i]->imagem;?>" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title"><?php echo $cursos[$i]->nome;?></h5>
-							<p class="card-text text-justify"><?php echo $cursos[$i]->descricao;?></p>
+							<p class="card-text text-justify min-h-120"><?php echo $cursos[$i]->descricao;?></p>
 							<a href="curso.php?id=<?php echo $cursos[$i]->id;?>" class="btn btn-dark">Dar uma olhada</a>
 						</div>
 					</div>

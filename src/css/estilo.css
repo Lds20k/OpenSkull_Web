@@ -2,6 +2,10 @@ html{
   overflow-y: scroll;
 }
 
+.min-h-120{
+  min-height: 120px;
+}
+
 .social-icons{
   width: 24px;
   text-align: center;

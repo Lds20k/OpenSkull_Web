@@ -2,9 +2,9 @@
 require_once('src/include/navbar/navbar.php');
 require_once('php/util.php');
 session_start();
-if(!isset($_SESSION['jwt'])){
+if(!isset($_SESSION['jwt']))
     header("Location: cursos.php");
-}
+
 $cursos = json_decode(Requesicao::curlGet('usuario/curso/'.$_SESSION['jwt']));
 ?>
 <!DOCTYPE html>
@@ -38,7 +38,11 @@ $cursos = json_decode(Requesicao::curlGet('usuario/curso/'.$_SESSION['jwt']));
 					$cursos = $cursos->cursos;
 					foreach ($cursos as $key => $curso) {
 				?>
-					<a href="estudar.php?id=<?php echo $curso->id;?>" class="col-sm-6 mt-3 mb-3 text-dark text-decoration-none">
+					<a 
+					<?php
+					if($curso->ativado)
+						echo 'href="estudar.php?id='.$curso->id.'"';
+					?> class="col-sm-6 mt-3 mb-3 text-dark text-decoration-none">
 						<div class="card shadow-lg <?php echo $curso->ativado ? 'border-success' : 'border-danger'; ?>" style="max-width: 540px; border: none; border-bottom: 15px solid;">
 							<div class="row no-gutters">
 								<div class="col-md-4">
@@ -47,7 +51,7 @@ $cursos = json_decode(Requesicao::curlGet('usuario/curso/'.$_SESSION['jwt']));
 								<div class="col-md-8">
 									<div class="card-body p-3" style="height: 100%;">
 										<h5 class="card-title"><?php echo $curso->nome;?></h5>
-										<p class="card-text text-justify" style="font-size: 15px; min-height: 68px;"><?php echo $curso->descricao;?></p>
+										<p class="card-text text-justify" style="font-size: 15px; min-height: 90px;"><?php echo $curso->descricao;?></p>
 										<p class="card-text position-absolute" style="bottom: 10px;width: calc(100% - 2rem);">
 											<small class="text-muted float-left"><?php echo $curso->criador->nome;?></small>
 											<small class="text-muted float-right"><?php echo $curso->horas;?>hrs</small>

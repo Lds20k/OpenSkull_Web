@@ -90,7 +90,17 @@ abstract class Navbar{
                     <a class="dropdown-item" href="download.php">Criar</a>
                 </div>
             </li>
-        <?php
+            <?php
+            $usuario = json_decode(Requesicao::curlGet('usuario/'.$_SESSION['jwt']))->usuario;
+            if($usuario->tipo === 'a'){
+            ?>
+                <li class="nav-item <?php Navbar::atual(3, Navbar::$index);?>">
+                    <a class="nav-link" href="ativador.php">
+                        Ativador
+                    </a>
+                </li>
+            <?php
+            }
         }else{
         ?>
             <li class="nav-item <?php Navbar::atual(2, Navbar::$index);?>">
@@ -100,6 +110,8 @@ abstract class Navbar{
             </li>
         <?php
         }
+
+        
     }
 
     private static function atual($numeroPagina, $index){

@@ -40,7 +40,7 @@ $cursos = json_decode(Requesicao::curlGet('curso'))->cursos;
 								<div class="col-md-8">
 									<div class="card-body p-3" style="height: 100%;">
 										<h5 class="card-title"><?php echo $curso->nome;?></h5>
-										<p class="card-text text-justify" style="font-size: 15px; min-height: 68px;"><?php echo $curso->descricao;?></p>
+										<p class="card-text text-justify" style="font-size: 15px; min-height: 90px;"><?php echo $curso->descricao;?></p>
 										<p class="card-text position-absolute" style="bottom: 10px;width: calc(100% - 2rem);">
 											<small class="text-muted float-left"><?php echo $curso->criador->nome;?></small>
 											<small class="text-muted float-right"><?php echo $curso->horas;?>hrs</small>

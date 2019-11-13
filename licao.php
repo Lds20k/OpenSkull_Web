@@ -2,9 +2,8 @@
 session_start();
 require_once('src/include/navbar/navbar.php');
 require_once('php/util.php');
-$curso = json_decode(Requesicao::curlGet('curso/'.$_GET['id']))->curso;
+$licao = json_decode(Requesicao::curlGet('licao/one/'.$_GET['id']))->licao;
 ?>
-<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -21,7 +20,7 @@ $curso = json_decode(Requesicao::curlGet('curso/'.$_GET['id']))->curso;
 			<div class="row">
 				<div class="col-sm-12 cont-curso">
 					<div class="container">
-						<h3 class="mt-4 mb-4"><?php echo $curso->nome; ?></h3>
+						<h3 class="mt-4 mb-4"><?php echo $licao->nome; ?></h3>
 					</div>
 				</div>
 			</div>
@@ -29,40 +28,7 @@ $curso = json_decode(Requesicao::curlGet('curso/'.$_GET['id']))->curso;
 		<div class="container bg-light text-dark">
 			<div class="row">
 				<div class="col">
-					<div>
-						<h4>Modulos:</h4>
-						<div id="accordion">
-							<?php
-							$i = 1;
-							foreach ($curso->modulos as $chave => $modulo) {
-							
-							?>
-							<div class="card">
-								<div class="card-header" id="heading<?php echo convertNumberToWord($i); ?>">
-									<h2 class="mb-0">
-										<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?php echo convertNumberToWord($i); ?>" aria-expanded="true" aria-controls="collapse<?php echo convertNumberToWord($i); ?>">
-										<?php echo $modulo->nome; ?>
-										</button>
-									</h2>
-								</div>
-								<div id="collapse<?php echo convertNumberToWord($i); ?>" class="collapse" aria-labelledby="heading<?php echo convertNumberToWord($i); ?>" data-parent="#accordion">
-									<div class="card-body">
-										<ul style="padding-left: 10px;">
-											<?php
-											foreach($modulo->licoes as $chave => $licao){
-												echo "<li><a href=\"licao.php?id=$licao->id\">$licao->nome</a></li>";
-											}
-											?>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<?php
-							$i++;
-							}
-							?>
-						</div>
-					</div>
+					Poe o video e o conteudo aqui
 				</div>
 			</div>
 		</div>

@@ -29,7 +29,6 @@ abstract class Requesicao{
         {
             trigger_error(curl_error($ch));
         }
-        var_dump($ch);
         curl_close($ch);
         return $result;
     }
